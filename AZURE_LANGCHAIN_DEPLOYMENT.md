@@ -46,7 +46,7 @@ Para desplegar una aplicación LangChain en Azure, necesitarás los siguientes s
 # app.py
 from fastapi import FastAPI
 from langchain_openai import AzureChatOpenAI
-from langchain.schema import HumanMessage
+from langchain_core.messages import HumanMessage
 import os
 
 app = FastAPI()
@@ -158,7 +158,7 @@ az containerapp secret set --name langchain-app --resource-group langchain-rg \
 # function_app.py
 import azure.functions as func
 from langchain_openai import AzureChatOpenAI
-from langchain.schema import HumanMessage
+from langchain_core.messages import HumanMessage
 import os
 
 app = func.FunctionApp()
@@ -336,12 +336,14 @@ response = qa_chain.run("¿Cuál es el proceso de inscripción?")
 **Solución**: Aumentar TPM (Tokens Per Minute) en Azure OpenAI o implementar retry logic
 
 ```python
-from langchain.llms import AzureOpenAI
-from langchain.callbacks import RetryCallback
+from langchain_openai import AzureChatOpenAI
 
-llm = AzureOpenAI(
+llm = AzureChatOpenAI(
+    deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
     max_retries=3,
-    request_timeout=60,
+    timeout=60,
 )
 ```
 

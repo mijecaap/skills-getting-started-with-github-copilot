@@ -19,7 +19,7 @@ load_dotenv()
 # Importar LangChain components
 try:
     from langchain_openai import AzureChatOpenAI
-    from langchain.schema import HumanMessage, SystemMessage, AIMessage
+    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
     from langchain.memory import ConversationBufferMemory
     from langchain.chains import ConversationChain
 except ImportError:
