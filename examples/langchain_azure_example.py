@@ -34,9 +34,11 @@ app = FastAPI(
 )
 
 # Configurar CORS
+# NOTA: En producción, reemplaza "*" con dominios específicos
+# NOTE: In production, replace "*" with specific domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=os.getenv("CORS_ORIGINS", "*").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -56,6 +58,8 @@ class ConversationRequest(BaseModel):
     conversation_id: Optional[str] = "default"
 
 # Almacenamiento en memoria para conversaciones
+# NOTA: En producción con múltiples workers, usa Redis o Cosmos DB
+# NOTE: In production with multiple workers, use Redis or Cosmos DB
 conversations = {}
 
 def get_azure_llm():

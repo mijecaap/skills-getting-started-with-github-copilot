@@ -362,7 +362,9 @@ pip freeze > requirements.txt
 
 ## Costos Estimados
 
-Para una aplicación pequeña-mediana:
+**Nota**: Los precios pueden variar. Consulta [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) para precios actualizados.
+
+Para una aplicación pequeña-mediana (estimación aproximada):
 - **Azure App Service (B1)**: ~$13/mes
 - **Azure OpenAI (Pay-as-you-go)**: Varía según uso (~$0.002/1K tokens)
 - **Azure Cosmos DB (Serverless)**: ~$0.25/million RU

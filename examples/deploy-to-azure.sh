@@ -65,7 +65,8 @@ DEPLOY_TYPE=${DEPLOY_TYPE:-1}
 echo ""
 print_warning "Configuración de Azure OpenAI requerida:"
 read -p "Azure OpenAI Endpoint: " AZURE_OPENAI_ENDPOINT
-read -p "Azure OpenAI API Key: " AZURE_OPENAI_API_KEY
+read -s -p "Azure OpenAI API Key (oculto): " AZURE_OPENAI_API_KEY
+echo ""
 read -p "Azure OpenAI Deployment Name [gpt-4]: " AZURE_OPENAI_DEPLOYMENT_NAME
 AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME:-gpt-4}
 
