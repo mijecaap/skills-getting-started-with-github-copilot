@@ -45,7 +45,7 @@ Para desplegar una aplicación LangChain en Azure, necesitarás los siguientes s
 ```python
 # app.py
 from fastapi import FastAPI
-from langchain.chat_models import AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI
 from langchain.schema import HumanMessage
 import os
 
@@ -61,7 +61,7 @@ llm = AzureChatOpenAI(
 
 @app.post("/chat")
 async def chat(message: str):
-    response = llm([HumanMessage(content=message)])
+    response = llm.invoke([HumanMessage(content=message)])
     return {"response": response.content}
 ```
 
@@ -157,7 +157,7 @@ az containerapp secret set --name langchain-app --resource-group langchain-rg \
 ```python
 # function_app.py
 import azure.functions as func
-from langchain.chat_models import AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI
 from langchain.schema import HumanMessage
 import os
 
@@ -175,7 +175,7 @@ def chat_function(req: func.HttpRequest) -> func.HttpResponse:
             api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         )
         
-        response = llm([HumanMessage(content=message)])
+        response = llm.invoke([HumanMessage(content=message)])
         
         return func.HttpResponse(
             response.content,
@@ -285,11 +285,10 @@ logger.addHandler(AzureLogHandler(
 
 ```python
 # rag_app.py
-from langchain.chat_models import AzureChatOpenAI
-from langchain.embeddings import AzureOpenAIEmbeddings
-from langchain.vectorstores import AzureSearch
+from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
+from langchain_community.vectorstores import AzureSearch
 from langchain.chains import RetrievalQA
-from langchain.document_loaders import AzureBlobStorageContainerLoader
+from langchain_community.document_loaders import AzureBlobStorageContainerLoader
 import os
 
 # Configurar componentes

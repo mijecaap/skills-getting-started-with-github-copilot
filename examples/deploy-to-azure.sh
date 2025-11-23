@@ -64,8 +64,10 @@ DEPLOY_TYPE=${DEPLOY_TYPE:-1}
 # Variables de entorno de Azure OpenAI
 echo ""
 print_warning "Configuración de Azure OpenAI requerida:"
+print_warning "NOTA: Para producción, considera usar Azure Key Vault en lugar de variables de entorno"
+print_warning "NOTE: For production, consider using Azure Key Vault instead of environment variables"
 read -p "Azure OpenAI Endpoint: " AZURE_OPENAI_ENDPOINT
-read -s -p "Azure OpenAI API Key (oculto): " AZURE_OPENAI_API_KEY
+read -s -p "Azure OpenAI API Key (oculto/hidden): " AZURE_OPENAI_API_KEY
 echo ""
 read -p "Azure OpenAI Deployment Name [gpt-4]: " AZURE_OPENAI_DEPLOYMENT_NAME
 AZURE_OPENAI_DEPLOYMENT_NAME=${AZURE_OPENAI_DEPLOYMENT_NAME:-gpt-4}
